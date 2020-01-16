@@ -31,6 +31,11 @@ void Pipeline::Rotate(float RotateX, float RotateY, float RotateZ)
 	m_rotateInfo.z = RotateZ;
 }
 
+void Pipeline::SetPerspectiveProj(float fov, float width, float height, float zNear, float zFar)
+{
+	m_persProj = {fov, width, height, zNear, zFar};
+}
+
 const glm::mat4* Pipeline::GetTrans()
 {
 	glm::mat4 rotateX = glm::mat4(1.0), rotateY = glm::mat4(1.0), rotateZ = glm::mat4(1.0);
@@ -44,7 +49,10 @@ const glm::mat4* Pipeline::GetTrans()
 	glm::mat4 translate = glm::mat4(1.0);
 	translate = glm::translate(translate, m_worldPos);
 
-	m_transformation = translate * scale * rotateX * rotateY * rotateZ;
+	glm::mat4 persProj = glm::mat4(1.0f);
+	persProj = glm::perspective(m_persProj.fov, m_persProj.width/m_persProj.height, m_persProj.zNear, m_persProj.zFar);
+
+	m_transformation = persProj * translate * scale * rotateX * rotateY * rotateZ;
 
 	return &m_transformation;
 }
