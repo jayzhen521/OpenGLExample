@@ -1,7 +1,9 @@
 add_library(common
     STATIC
     include/LoadShaders.h
+    include/Pipeline.h
     src/LoadShaders.cpp
+    src/Pipeline.cpp
 )
 
 target_include_directories(
@@ -13,4 +15,4 @@ target_include_directories(
     $ENV{GLM_PATH}
 )
 
-set_target_properties(common PROPERTIES LINKER_LANGUAGE C)
+set_target_properties(common PROPERTIES LINKER_LANGUAGE CXX)
