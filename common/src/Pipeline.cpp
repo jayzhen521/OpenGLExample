@@ -3,7 +3,7 @@
 #include "Pipeline.h"
 
 Pipeline::Pipeline()
-	:m_scale(glm::vec3()),
+	:m_scale(glm::vec3(1.0f, 1.0f, 1.0f)),
 	m_rotateInfo(glm::vec3()),
 	m_worldPos(glm::vec3()),
 	m_transformation(glm::mat4())
@@ -33,15 +33,15 @@ void Pipeline::Rotate(float RotateX, float RotateY, float RotateZ)
 
 const glm::mat4* Pipeline::GetTrans()
 {
-	glm::mat4 rotateX, rotateY, rotateZ;
+	glm::mat4 rotateX = glm::mat4(1.0), rotateY = glm::mat4(1.0), rotateZ = glm::mat4(1.0);
 	rotateX = glm::rotate(rotateX, m_rotateInfo.x, glm::vec3(1.0f, 0.0f, 0.0f));
 	rotateY = glm::rotate(rotateY, m_rotateInfo.y, glm::vec3(0.0f, 1.0f, 0.0f));
 	rotateZ = glm::rotate(rotateZ, m_rotateInfo.z, glm::vec3(0.0f, 0.0f, 1.0f));
 
-	glm::mat4 scale;
+	glm::mat4 scale = glm::mat4(1.0);
 	scale = glm::scale(scale, m_scale);
 
-	glm::mat4 translate;
+	glm::mat4 translate = glm::mat4(1.0);
 	translate = glm::translate(translate, m_worldPos);
 
 	m_transformation = translate * scale * rotateX * rotateY * rotateZ;
