@@ -2,6 +2,7 @@ add_library(common
     STATIC
     include/LoadShaders.h
     include/Pipeline.h
+    include/Config.h
     src/LoadShaders.cpp
     src/Pipeline.cpp
 )
