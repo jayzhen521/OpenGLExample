@@ -2,8 +2,10 @@
 
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
+#include <memory>
 
 #include "Config.h"
+#include "Camera.h"
 
 struct PerspectiveProj
 {
@@ -27,22 +29,6 @@ struct PerspectiveProj
     float zFar;
 };
 
-struct Camera {
-
-    Camera(
-        glm::vec3 Pos = { 0.0f, 0.0f, 0.0f },
-        glm::vec3 Target = { 0.0f, 0.0f, -1.0f },
-        glm::vec3 Up = { 0.0f, 1.0f, 0.0f })
-        :Pos(Pos),
-        Target(Target),
-        Up(Up)
-    {}
-
-    glm::vec3 Pos;
-    glm::vec3 Target;
-    glm::vec3 Up;
-};
-
 class Pipeline
 {
 public:
@@ -51,7 +37,7 @@ public:
     void WorldPos(float x, float y, float z);
     void Rotate(float RotateX, float RotateY, float RotateZ);
     void SetPerspectiveProj(float fov, float width, float height, float zNear, float zFar);
-    void SetCamera(glm::vec3 pos, glm::vec3 target, glm::vec3 up);
+    void SetCamera(std::shared_ptr<Camera> pCamera);
     const glm::mat4* GetTrans();
 private:
     glm::vec3 m_scale;
@@ -59,5 +45,5 @@ private:
     glm::vec3 m_rotateInfo;
     glm::mat4 m_transformation;
     PerspectiveProj m_persProj = {};
-    Camera m_camera = {};
+    std::shared_ptr<Camera> m_pCamera;
 };

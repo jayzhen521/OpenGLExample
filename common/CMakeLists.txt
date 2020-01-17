@@ -3,8 +3,10 @@ add_library(common
     include/LoadShaders.h
     include/Pipeline.h
     include/Config.h
+    include/Camera.h
     src/LoadShaders.cpp
     src/Pipeline.cpp
+    src/Camera.cpp
 )
 
 target_include_directories(

@@ -36,9 +36,9 @@ void Pipeline::SetPerspectiveProj(float fov, float width, float height, float zN
 	m_persProj = {fov, width, height, zNear, zFar};
 }
 
-void Pipeline::SetCamera(glm::vec3 pos, glm::vec3 target, glm::vec3 up)
+void Pipeline::SetCamera(std::shared_ptr<Camera> pCamera)
 {
-	m_camera = {pos, target, up};
+	m_pCamera = pCamera;
 }
 
 const glm::mat4* Pipeline::GetTrans()
@@ -54,7 +54,7 @@ const glm::mat4* Pipeline::GetTrans()
 	glm::mat4 translate = glm::mat4(1.0);
 	translate = glm::translate(translate, m_worldPos);
 
-	glm::mat4 cameraTranslate = glm::lookAt(m_camera.Pos, m_camera.Target, m_camera.Up);
+	glm::mat4 cameraTranslate = glm::lookAt(m_pCamera->GetPos(), m_pCamera->GetTarget(), m_pCamera->GetUp());
 
 	glm::mat4 persProj = glm::mat4(1.0f);
 	persProj = glm::perspective(m_persProj.fov, m_persProj.width/m_persProj.height, m_persProj.zNear, m_persProj.zFar);
