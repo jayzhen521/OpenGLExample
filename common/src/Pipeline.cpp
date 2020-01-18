@@ -54,7 +54,9 @@ const glm::mat4* Pipeline::GetTrans()
 	glm::mat4 translate = glm::mat4(1.0);
 	translate = glm::translate(translate, m_worldPos);
 
-	glm::mat4 cameraTranslate = glm::lookAt(m_pCamera->GetPos(), m_pCamera->GetTarget(), m_pCamera->GetUp());
+	glm::mat4 cameraTranslate = glm::mat4(1.0f);
+	//glm::lookAt the second parameter is target point, not direction.
+	cameraTranslate = glm::lookAt(m_pCamera->GetPos(), m_pCamera->GetTarget() + m_pCamera->GetPos(), m_pCamera->GetUp());
 
 	glm::mat4 persProj = glm::mat4(1.0f);
 	persProj = glm::perspective(m_persProj.fov, m_persProj.width/m_persProj.height, m_persProj.zNear, m_persProj.zFar);

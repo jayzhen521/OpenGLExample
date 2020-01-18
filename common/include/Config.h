@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 const float PI = 3.14159f;
 
 const uint32_t WINDOW_WIDTH = 800;
