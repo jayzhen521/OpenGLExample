@@ -22,6 +22,12 @@ find_path(GLFW_INCLUDE_DIR
         $ENV{GLFW_PATH}/include
 )
 
+find_path(STB_INCLUDE_DIR
+    stb_image.h
+    HINTS
+        $ENV{STB_PATH}
+)
+
 find_library(GLFW_LIBRARY_DEBUG
     glfw3dll
     HINTS
@@ -33,6 +39,7 @@ find_library(GLFW_LIBRARY_RELEASE
     HINTS
         $ENV{GLFW_PATH}/lib/Release
 )
+
 # end find_include and find_library
 
 #macro

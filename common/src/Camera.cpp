@@ -5,8 +5,6 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
-#include <iostream>
-
 #include "Camera.h"
 #include "Config.h"
 
@@ -139,8 +137,6 @@ void Camera::OnMouse(uint32_t x, uint32_t y)
         m_onUpperEdge = false;
         m_onLowerEdge = false;
     }
-
-    std::cout << "m_onLeftEdge = " << m_onLeftEdge << std::endl;
 
     Update();
 }
