@@ -57,6 +57,10 @@ ENDMACRO()
 
 add_subdirectory(gl3w)
 
+add_subdirectory(glfwsupport)
+
+add_subdirectory(util)
+
 add_subdirectory(common)
 
 add_subdirectory(ogldev)

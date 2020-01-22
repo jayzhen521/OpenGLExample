@@ -4,21 +4,22 @@
 #include <glm/vec2.hpp>
 
 #include "Config.h"
+#include "Keys.h"
 
 const uint32_t MARGIN = 10;
 
-struct Camera {
-
+class Camera {
+public:
     Camera(
         uint32_t WindowWidth,
         uint32_t WindowHeight,
-        const glm::vec3& Pos = { 0.0f, 0.0f, 0.0f },
+        const glm::vec3& Pos = { 0.0f, 0.0f, 10.0f },
         const glm::vec3& Target = { 0.0f, 0.0f, -1.0f },
         const glm::vec3& Up = { 0.0f, 1.0f, 0.0f });
 
     void Init();
 
-    bool OnKeyboard(int Key);
+    bool OnKeyboard(KEY key);
 
     /*
     *If we move mouse to the left edge, with DelatX changed, status m_onLeftEdge will not be changed,

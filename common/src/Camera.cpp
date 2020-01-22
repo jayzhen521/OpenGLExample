@@ -1,4 +1,3 @@
-#include <GLFW/glfw3.h>
 #include <glm/geometric.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
@@ -61,25 +60,25 @@ void Camera::Init()
     //?send command to window
 }
 
-bool Camera::OnKeyboard(int key)
+bool Camera::OnKeyboard(KEY key)
 {
     bool Ret = false;
 
     switch (key)
     {
-    case GLFW_KEY_UP://towards the target
+    case KEY::KEY_UP://towards the target
     {
         m_pos += m_target * CameraMoveStepSize;
         Ret = true;
         break;
     }
-    case GLFW_KEY_DOWN:
+    case KEY::KEY_DOWN:
     {
         m_pos -= m_target * CameraMoveStepSize;
         Ret = true;
         break;
     }
-    case GLFW_KEY_LEFT:
+    case KEY::KEY_LEFT:
     {
         glm::vec3 left = -glm::cross(m_target, m_up);
         left = glm::normalize(left);
@@ -88,7 +87,7 @@ bool Camera::OnKeyboard(int key)
         Ret = true;
         break;
     }
-    case GLFW_KEY_RIGHT:
+    case KEY::KEY_RIGHT:
     {
         glm::vec3 right = glm::cross(m_target, m_up);
         right = glm::normalize(right);
