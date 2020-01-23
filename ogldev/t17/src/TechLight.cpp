@@ -38,7 +38,7 @@ bool TechLight::Init()
 
 void TechLight::SetWVP(const std::shared_ptr<glm::mat4> WVP)
 {
-	glUniformMatrix4fv(m_WVPLocation, 1, GL_TRUE, glm::value_ptr(*WVP));
+	glUniformMatrix4fv(m_WVPLocation, 1, GL_FALSE, glm::value_ptr(*WVP));
 }
 
 void TechLight::SetTextureUnit(unsigned int TextureUnit)

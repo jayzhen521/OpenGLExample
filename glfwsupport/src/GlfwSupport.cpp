@@ -123,18 +123,23 @@ BUTTON_ACTION GlfwSupport::GlfwButtonActionToButtonAction(int glfwAction)
 
 void GlfwSupport::KeyboardCB(GLFWwindow* window, int glfwKey, int scancode, int action, int mods)
 {
+	KEY key = KEY::KEY_UNDEFINED;
 	if (
 		((glfwKey >= '+') && (glfwKey <= '9')) ||
 		((glfwKey >= 'A') && (glfwKey <= 'Z')) ||
 		((glfwKey >= 'a') && (glfwKey <= 'z')))
 	{
 		KEY key = (KEY)glfwKey;
-		m_pCallbacks->KeyboardCB(key);
 	}
 	else
 	{
-		std::cerr << glfwKey << "Unimplemented GLFW key" << std::endl;
+		key = GlfwKeyToKey(glfwKey);
 	}
+
+	if(key == KEY::KEY_UNDEFINED)
+		std::cerr << glfwKey << "Unimplemented GLFW key" << std::endl;
+
+	m_pCallbacks->KeyboardCB(key);
 }
 
 void GlfwSupport::PassiveMouseCB(GLFWwindow* window, double xpos, double ypos)
@@ -165,7 +170,8 @@ void GlfwSupport::InitCallbacks()
 {
 	glfwSetKeyCallback(m_pWindow, KeyboardCB);
 	glfwSetCursorPosCallback(m_pWindow, PassiveMouseCB);
-	glfwSetMouseButtonCallback(m_pWindow, MouseCB);
+	//glfwSetMouseButtonCallback(m_pWindow, MouseCB);
+	glfwSetCursorPos(m_pWindow, 400.0f, 400.0f);
 }
 
 bool GlfwSupport::isWithDepth()

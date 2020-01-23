@@ -60,7 +60,7 @@ void AmbientLight::Display()
 {
 	m_pCamera->OnRender();
 
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	m_move += 0.1f;
 	Pipeline p;
@@ -97,6 +97,7 @@ void AmbientLight::PassiveMouseCB(int x, int y)
 void AmbientLight::FrameSetting(bool withDepth, bool withStencil)
 {
 	glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
+	glClearDepth(1.0f);
 	glFrontFace(GL_CCW);
 	glCullFace(GL_BACK);
 	glEnable(GL_CULL_FACE);
