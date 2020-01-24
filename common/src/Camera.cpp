@@ -22,33 +22,34 @@ Camera::Camera(uint32_t WindowWidth, uint32_t WindowHeight, const glm::vec3& Pos
 
 void Camera::Init()
 {
-    glm::vec3 HTarget(m_target.x, 0.0f, m_target.z);
-    HTarget = glm::normalize(HTarget);
+    //glm::vec3 HTarget(m_target.x, 0.0f, m_target.z);
+    //HTarget = glm::normalize(HTarget);
 
-    if (HTarget.z >= 0)
-    {
-        if (HTarget.x >= 0)
-        {
-            m_angleH = 360.0f - glm::degrees(asinf(HTarget.z));
-        }
-        else
-        {
-            m_angleH = 180.0f + glm::degrees(asinf(HTarget.z));
-        }
-    }
-    else
-    {
-        if (HTarget.x >= 0)
-        {
-            m_angleH = glm::degrees(asinf(HTarget.z));
-        }
-        else
-        {
-            m_angleH = 180.0f - glm::degrees(asinf(HTarget.z));
-        }
-    }
+    //if (HTarget.z >= 0)
+    //{
+    //    if (HTarget.x >= 0)
+    //    {
+    //        m_angleH = 360.0f - glm::degrees(asinf(HTarget.z));
+    //    }
+    //    else
+    //    {
+    //        m_angleH = 180.0f + glm::degrees(asinf(HTarget.z));
+    //    }
+    //}
+    //else
+    //{
+    //    if (HTarget.x >= 0)
+    //    {
+    //        //m_angleH = 360.0f - glm::degrees(asinf(HTarget.z));
+    //        m_angleH = -glm::degrees(asinf(HTarget.z));
+    //    }
+    //    else
+    //    {
+    //        m_angleH = 180.0f + glm::degrees(asinf(HTarget.z));
+    //    }
+    //}
 
-    m_angleV = -glm::degrees(asinf(m_target.y));
+    //m_angleV = -glm::degrees(asinf(m_target.y));
 
     m_onUpperEdge = false;
     m_onLowerEdge = false;
@@ -182,7 +183,7 @@ void Camera::Update()
     const float cos_aotv = cosf(aotv);
 
     glm::vec3 VAxis = glm::vec3(0.0f, 1.0f, 0.0f);
-    glm::vec3 View = glm::vec3(1.0f, 0.0f, 0.0f);
+    glm::vec3 View = glm::vec3(0.0f, 0.0f, -1.0f);
     glm::quat quaternion = glm::quat(cos_aot, sin_aot * VAxis);
     View = glm::conjugate(quaternion) * View * quaternion;
     View = glm::normalize(View);
