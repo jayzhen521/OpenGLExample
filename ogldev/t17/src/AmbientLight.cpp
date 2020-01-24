@@ -86,6 +86,14 @@ void AmbientLight::Display()
 
 void AmbientLight::KeyboardCB(KEY key, BUTTON_ACTION state)
 {
+	switch (key) {
+	case KEY::KEY_a:
+		m_pDirectionalLight->AmbientIntensity += 0.05f;
+		return;
+	case KEY::KEY_s:
+		m_pDirectionalLight->AmbientIntensity -= 0.05f;
+		return;
+	}
 	m_pCamera->OnKeyboard(key);
 }
 
