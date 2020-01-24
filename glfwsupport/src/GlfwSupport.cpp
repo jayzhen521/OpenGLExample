@@ -124,22 +124,32 @@ BUTTON_ACTION GlfwSupport::GlfwButtonActionToButtonAction(int glfwAction)
 void GlfwSupport::KeyboardCB(GLFWwindow* window, int glfwKey, int scancode, int action, int mods)
 {
 	KEY key = KEY::KEY_UNDEFINED;
-	if (
-		((glfwKey >= '+') && (glfwKey <= '9')) ||
-		((glfwKey >= 'A') && (glfwKey <= 'Z')) ||
-		((glfwKey >= 'a') && (glfwKey <= 'z')))
+
+	if (action == GLFW_PRESS)
 	{
-		KEY key = (KEY)glfwKey;
-	}
-	else
-	{
-		key = GlfwKeyToKey(glfwKey);
+		if ((glfwKey >= '0') && (glfwKey <= '9') && mods == 0)
+		{
+			key = (KEY)glfwKey;
+		}
+		else if ((glfwKey >= 'A') && (glfwKey <= 'Z') && mods == GLFW_MOD_SHIFT || mods == GLFW_MOD_CAPS_LOCK)
+		{
+			key = (KEY)glfwKey;
+		}
+		else if ((glfwKey >= 'A') && (glfwKey <= 'Z') && (mods == 0 || (mods == (GLFW_MOD_CAPS_LOCK | GLFW_MOD_SHIFT))))
+		{
+			key = (KEY)(glfwKey + 32);
+		}
+		else
+		{
+			key = GlfwKeyToKey(glfwKey);
+		}
+
+		if (key == KEY::KEY_UNDEFINED)
+			std::cerr << glfwKey << "Unimplemented GLFW key" << std::endl;
+
+		m_pCallbacks->KeyboardCB(key);
 	}
 
-	if(key == KEY::KEY_UNDEFINED)
-		std::cerr << glfwKey << "Unimplemented GLFW key" << std::endl;
-
-	m_pCallbacks->KeyboardCB(key);
 }
 
 void GlfwSupport::PassiveMouseCB(GLFWwindow* window, double xpos, double ypos)
