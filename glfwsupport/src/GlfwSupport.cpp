@@ -125,7 +125,7 @@ void GlfwSupport::KeyboardCB(GLFWwindow* window, int glfwKey, int scancode, int 
 {
 	KEY key = KEY::KEY_UNDEFINED;
 
-	if (action == GLFW_PRESS)
+	if (action == GLFW_PRESS || action == GLFW_REPEAT)
 	{
 		if ((glfwKey >= '0') && (glfwKey <= '9') && mods == 0)
 		{
